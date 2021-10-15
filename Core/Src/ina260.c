@@ -67,7 +67,7 @@ uint16_t ina260_ReadDeviceID()
 
 int16_t ina260_GetCurrent()
 {
-  int16_t current = ((int16_t)ina260_ReadReg(INA260_REG_CURRENT) >> 3) * 10;
+  int16_t current = ((int16_t)ina260_ReadReg(INA260_REG_CURRENT)) * 5 >> 2;
 
   return current;
 }
@@ -81,9 +81,9 @@ int16_t ina260_GetCurrent()
 int16_t ina260_GetVBus()
 {
   int16_t val;
-  val = (ina260_ReadReg(INA260_REG_VOLTAGE) >> 3) * 10;
+  val = (int16_t)(((int32_t)ina260_ReadReg(INA260_REG_VOLTAGE) * 5) >> 2);
 
-  return (uint32_t)val;
+  return val;
 }
 
 
